@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+
+    <h2>Show Student</h2>
+    <a href="/acc/create" class="btn btn-success">Create</a>
+    <br>
+    <br>
+    <form action="/acc/findByName" method="get">
+        <input type="text" class="form-control" placeholder="search" name="findName">
+        <input type="text" hidden name="action" value="findName">
+        <button type="submit" class="btn btn-success">Find</button>
+    </form>
+
+    <br>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>DateOfBirth</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>ClassRoom</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student,loop:${list}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.dateOfBirth}"></td>
+            <td th:text="${student.address}"></td>
+            <td th:text="${student.phone}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.classroom}"></td>
+            <td><a th:href="@{/acc/edit/{id}(id = ${student.id})}" class="btn btn-warning">Edit</a></td>
+            <td><a th:href="@{/acc/delete(id = ${student.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
